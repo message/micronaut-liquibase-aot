@@ -1,0 +1,30 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd">
+	<changeSet id="20211004-020755-schema-add_countries_table" author="" dbms="postgresql">
+		<createTable tableName="countries">
+			<column name="id" type="bigserial" />
+			<column name="name" type="varchar(255)" />
+			<column name="code_alpha_2" type="varchar(2)" />
+			<column name="code_alpha_3" type="varchar(3)" />
+		</createTable>
+
+		<!-- Indexes -->
+		<addPrimaryKey tableName="countries" columnNames="id" constraintName="pk__countries__id" />
+
+		<addNotNullConstraint tableName="countries" columnName="id" />
+		<addNotNullConstraint tableName="countries" columnName="name" />
+		<addNotNullConstraint tableName="countries" columnName="code_alpha_2" />
+		<addNotNullConstraint tableName="countries" columnName="code_alpha_3" />
+
+		<createIndex tableName="countries" indexName="idx__countries__code_alpha_2">
+			<column name="code_alpha_2" />
+		</createIndex>
+
+		<createIndex tableName="countries" indexName="idx__countries__code_alpha_3">
+			<column name="code_alpha_3" />
+		</createIndex>
+
+		<addUniqueConstraint tableName="countries" columnNames="code_alpha_2, code_alpha_3" constraintName="uc__countries__code_alpha_2__code_alpha_3" />
+	</changeSet>
+</databaseChangeLog>

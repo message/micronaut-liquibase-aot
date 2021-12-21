@@ -1,0 +1,52 @@
+micronaut:
+  application:
+    name: liquibaseaot
+  server:
+    port: 29992
+#    @see https://github.com/micronaut-projects/micronaut-aot/issues/41
+#    max-request-size: 2147483648 # 2gb (1024 * 1024 * 1024 * 2)
+    multipart:
+      enabled: true
+      mixed: true
+      disk: true
+#    @see https://github.com/micronaut-projects/micronaut-aot/issues/41
+#      max-file-size: 2147483648 # 2gb (1024 * 1024 * 1024 * 2)
+      threshold: 20000
+  http:
+    client:
+      read-timeout: 60m
+    services:
+      nofollow:
+        follow-redirects: false
+  data:
+    pageable:
+      default-page-size: 10
+      max-page-size: 100
+jackson:
+  timeZone: 'UTC'
+  serializationInclusion: ALWAYS
+  serialization:
+    WRITE_DATES_AS_TIMESTAMPS: false
+  parser:
+    ALLOW_UNQUOTED_FIELD_NAMES: true
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/liquibaseaot
+#    url: jdbc:postgresql://localhost:5432/liquibaseaot-hibernate
+    driverClassName: org.postgresql.Driver
+    username: root
+    password: 'root'
+    schema-generate: none
+    dialect: POSTGRES
+
+jpa.default.properties.hibernate:
+  hbm2ddl.auto: validate
+#  hbm2ddl.auto: update
+  jdbc.time_zone: 'UTC'
+
+liquibase:
+  datasources:
+    default:
+      change-log: 'classpath:liquibase/liquibase.xml'
+#      enabled: false

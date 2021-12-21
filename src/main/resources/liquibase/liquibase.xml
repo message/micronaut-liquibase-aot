@@ -1,0 +1,7 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+	<include file="liquibase/migrations/20211004-020755-schema-add_countries_table.xml" />
+	<include file="liquibase/migrations/20211004-021100-fixture-insert_countries.xml" />
+</databaseChangeLog>
